@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}
+Student Details
+{% endblock title %}
+
+
+{% block content %}
+
+<style>
+
+    .student-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .student-info {
+        margin-top: 25px;
+    }
+
+    .info-row {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .label {
+        font-weight: bold;
+    }
+
+    .actions {
+        margin-top: 30px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+</style>
+
+
+<div class="student-header">
+
+    <h1>
+        👤 Student Details
+    </h1>
+
+    <a
+        href="{% url 'student_list' %}"
+        class="btn btn-secondary"
+    >
+        ← Back to Students
+    </a>
+
+</div>
+
+
+<div class="student-info">
+
+    <div class="info-row">
+        <div class="label">Full Name</div>
+        <div>{{ student.full_name }}</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Email</div>
+        <div>{{ student.email }}</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Grade</div>
+        <div>{{ student.grade }}</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Date of Birth</div>
+        <div>{{ student.date_of_birth }}</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Parent Contact</div>
+        <div>{{ student.parent_contact|default:"Not provided" }}</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Address</div>
+        <div>{{ student.address|default:"Not provided" }}</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Registration Date</div>
+        <div>{{ student.registration_date }}</div>
+    </div>
+
+</div>
+
+
+<div class="actions">
+
+    <a
+        href="{% url 'edit_student' student.id %}"
+        class="btn btn-success"
+    >
+        ✏️ Edit Student
+    </a>
+
+    <a
+        href="{% url 'delete_student' student.id %}"
+        class="btn btn-danger"
+    >
+        🗑️ Delete Student
+    </a>
+
+    <a
+        href="{% url 'student_list' %}"
+        class="btn btn-secondary"
+    >
+        📋 Student List
+    </a>
+
+</div>
+
+{% endblock content %}

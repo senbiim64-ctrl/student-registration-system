@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Student
+{% endblock title %}
+
+
+{% block content %}
+
+<h1>✏️ Edit Student</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+
+    <p>
+        <label>First Name</label>
+
+        <input
+            type="text"
+            name="first_name"
+            value="{{ student.first_name }}"
+            required
+        >
+    </p>
+
+
+    <p>
+        <label>Last Name</label>
+
+        <input
+            type="text"
+            name="last_name"
+            value="{{ student.last_name }}"
+            required
+        >
+    </p>
+
+
+    <p>
+        <label>Email</label>
+
+        <input
+            type="email"
+            name="email"
+            value="{{ student.email }}"
+            required
+        >
+    </p>
+
+
+    <p>
+        <label>Grade</label>
+
+        <input
+            type="number"
+            name="grade"
+            value="{{ student.grade }}"
+            min="1"
+            max="12"
+            required
+        >
+    </p>
+
+
+    <p>
+        <label>Date of Birth</label>
+
+        <input
+            type="date"
+            name="dob"
+            value="{{ student.date_of_birth|date:'Y-m-d' }}"
+            required
+        >
+    </p>
+
+
+    <p>
+        <label>Parent Contact</label>
+
+        <input
+            type="text"
+            name="parent_contact"
+            value="{{ student.parent_contact }}"
+        >
+    </p>
+
+
+    <p>
+        <label>Address</label>
+
+        <textarea
+            name="address"
+            rows="4"
+        >{{ student.address }}</textarea>
+    </p>
+
+
+    <button
+        type="submit"
+        class="btn btn-success"
+    >
+        💾 Save Changes
+    </button>
+
+
+    <a
+        href="{% url 'student_detail' student.id %}"
+        class="btn btn-secondary"
+    >
+        Cancel
+    </a>
+
+</form>
+
+
+<style>
+
+    form {
+        max-width: 600px;
+    }
+
+    form p {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+</style>
+
+{% endblock content %}
