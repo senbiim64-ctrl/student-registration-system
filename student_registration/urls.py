@@ -6,7 +6,19 @@ from students import views
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
+# Login
+path(
+    'login/',
+    views.login_view,
+    name='login'
+),
 
+# Logout
+path(
+    'logout/',
+    views.logout_view,
+    name='logout'
+),
     # Home
     path(
         '',

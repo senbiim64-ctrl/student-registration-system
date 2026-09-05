@@ -1,12 +1,46 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .models import Student
 
 
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(
+                request,
+                'Username or password is incorrect!'
+            )
+
+    return render(request, 'login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+@login_required
 def home(request):
     return render(request, 'home.html')
 
 
+@login_required
 def student_list(request):
     search = request.GET.get('search', '').strip()
 
@@ -29,10 +63,10 @@ def student_list(request):
     })
 
 
+@login_required
 def register_student(request):
     if request.method == 'POST':
         try:
-            # Get form data
             first_name = request.POST.get('first_name', '').strip()
             last_name = request.POST.get('last_name', '').strip()
             email = request.POST.get('email', '').strip()
@@ -41,22 +75,14 @@ def register_student(request):
             parent_contact = request.POST.get('parent_contact', '').strip()
             address = request.POST.get('address', '').strip()
 
-            # Validate required fields
             if not all([first_name, last_name, email, grade, dob]):
-                messages.error(
-                    request,
-                    "All required fields must be filled!"
-                )
+                messages.error(request, "All required fields must be filled!")
                 return render(request, 'register.html')
 
-            # Validate grade
             try:
                 grade_number = int(grade)
             except ValueError:
-                messages.error(
-                    request,
-                    "Grade must be a number!"
-                )
+                messages.error(request, "Grade must be a number!")
                 return render(request, 'register.html')
 
             if grade_number < 1 or grade_number > 12:
@@ -66,7 +92,6 @@ def register_student(request):
                 )
                 return render(request, 'register.html')
 
-            # Check duplicate email
             if Student.objects.filter(email=email).exists():
                 messages.error(
                     request,
@@ -74,7 +99,6 @@ def register_student(request):
                 )
                 return render(request, 'register.html')
 
-            # Create student
             student = Student.objects.create(
                 first_name=first_name,
                 last_name=last_name,
@@ -101,6 +125,7 @@ def register_student(request):
     return render(request, 'register.html')
 
 
+@login_required
 def student_detail(request, student_id):
     student = get_object_or_404(Student, id=student_id)
 
@@ -109,6 +134,7 @@ def student_detail(request, student_id):
     })
 
 
+@login_required
 def delete_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
 
@@ -128,6 +154,7 @@ def delete_student(request, student_id):
     })
 
 
+@login_required
 def edit_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
 
@@ -143,7 +170,6 @@ def edit_student(request, student_id):
             ).strip()
             address = request.POST.get('address', '').strip()
 
-            # Validate required fields
             if not all([first_name, last_name, email, grade, dob]):
                 messages.error(
                     request,
@@ -153,14 +179,10 @@ def edit_student(request, student_id):
                     'student': student
                 })
 
-            # Validate grade
             try:
                 grade_number = int(grade)
             except ValueError:
-                messages.error(
-                    request,
-                    "Grade must be a number!"
-                )
+                messages.error(request, "Grade must be a number!")
                 return render(request, 'edit_student.html', {
                     'student': student
                 })
@@ -174,7 +196,6 @@ def edit_student(request, student_id):
                     'student': student
                 })
 
-            # Check email belongs to another student
             if Student.objects.filter(
                 email=email
             ).exclude(id=student.id).exists():
@@ -186,7 +207,6 @@ def edit_student(request, student_id):
                     'student': student
                 })
 
-            # Update student
             student.first_name = first_name
             student.last_name = last_name
             student.email = email
