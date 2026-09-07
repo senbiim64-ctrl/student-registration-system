@@ -1,9 +1,24 @@
+
 <!doctype html>
-<html>
+<html lang="en">
+
 <head>
-    <title>{% block title %}Student Registration System{% endblock title %}</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        Student Registration System
+        {% endblock title %}
+    </title>
 
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             max-width: 900px;
@@ -12,23 +27,42 @@
             background-color: #f5f5f5;
         }
 
+        /* Navigation */
         .nav {
             background: #1a73e8;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 8px;
+
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            flex-wrap: wrap;
         }
 
         .nav a {
             color: white;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 10px 18px;
+            border-radius: 5px;
         }
 
         .nav a:hover {
             background: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
         }
 
+        /* Logout */
+        .logout {
+            margin-left: auto;
+            background: #dc3545;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            background: #b02a37 !important;
+        }
+
+        /* Content */
         .content {
             background: white;
             padding: 20px;
@@ -36,6 +70,7 @@
             margin-top: 20px;
         }
 
+        /* Buttons */
         .btn {
             display: inline-block;
             background: #1a73e8;
@@ -45,24 +80,50 @@
             border-radius: 5px;
         }
 
+        .btn:hover {
+            opacity: 0.9;
+        }
+
         .btn-success {
             background: #28a745;
         }
+
     </style>
+
 </head>
 
 <body>
 
+    <!-- Navigation -->
     <div class="nav">
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'student_list' %}">Students</a>
-        <a href="{% url 'register' %}">Register</a>
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'student_list' %}">
+            Students
+        </a>
+
+        <a href="{% url 'register' %}">
+            Register
+        </a>
+
+        <a href="{% url 'logout' %}" class="logout">
+            Logout
+        </a>
+
     </div>
 
+
+    <!-- Page Content -->
     <div class="content">
+
         {% block content %}
         {% endblock content %}
+
     </div>
 
 </body>
+
 </html>
