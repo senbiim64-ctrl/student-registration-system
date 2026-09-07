@@ -20,12 +20,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 SECRET_KEY = 'django-insecure-s0n4_m$9!qhb(_e@2wnu&f&3r91r&u(@nxa#k=6ssyb_*szx-y'
+=======
+SECRET_KEY = 'django-insecure-k_)vcsp$vqksz^lvi)ufk0-^$9l&=u_=s1j^(kwbmp!-k1_=ra'
+>>>>>>> 3c1725c870939e679fdd4dd4b049892e95a3f262
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = []
+=======
+ALLOWED_HOSTS = ["*"]
+>>>>>>> 3c1725c870939e679fdd4dd4b049892e95a3f262
 
 
 # Application definition
@@ -37,6 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
+=======
+    'students',
+>>>>>>> 3c1725c870939e679fdd4dd4b049892e95a3f262
 ]
 
 MIDDLEWARE = [
@@ -125,3 +137,11 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+<<<<<<< HEAD
+=======
+STATIC_URL = 'static/'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
+>>>>>>> 3c1725c870939e679fdd4dd4b049892e95a3f262
