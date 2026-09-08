@@ -59,6 +59,36 @@ Home
         margin: 5px;
     }
 
+    .developer {
+    display: block;
+    margin: 25px auto 0;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #f1f3f4;
+    color: #1a73e8;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.developer strong {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.developer:hover {
+    background: #e8f0fe;
+}
+
+.developer-info {
+    display: none;
+    margin: 15px auto;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+}
 </style>
 
 
@@ -146,8 +176,43 @@ Home
             ➕ Register Student
         </a>
 
-    </div>
 
+        </div>
+
+        <script>
+            function showDeveloper() {
+
+                const info =
+                    document.getElementById("developerInfo");
+
+                if (info.style.display === "none" ||
+                    info.style.display === "") {
+
+                    info.style.display = "block";
+
+                } else {
+
+                    info.style.display = "none";
+                }
+            }
+        </script>
+
+    </div>
+<button
+    type="button"
+    class="developer"
+    onclick="showDeveloper()"
+>
+    <strong>Developed By Sanbataa-Mulaatuu</strong>
+    <br><br>
+    For More Information Click Here
+</button>
+
+<div id="developerInfo" class="developer-info">
+    <p>📞 Phone: +251910073110 / +251988881445</p>
+
+    <p>✉️ Gmail: senbiim64@gmail.com</p>
+</div>
 </div>
 
 {% endblock content %}
