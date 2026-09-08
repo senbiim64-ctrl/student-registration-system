@@ -81,6 +81,17 @@ Home
     background: #e8f0fe;
 }
 
+.developer {
+    color: #1a73e8;
+}
+
+.developer strong {
+    color: #1a73e8;
+}
+
+.developer {
+    line-height: 1.5;
+}
 .developer-info {
     display: none;
     margin: 15px auto;
@@ -88,6 +99,11 @@ Home
     background: #f8f9fa;
     border-radius: 10px;
     text-align: center;
+}
+.click-info {
+    color: red;
+    font-size: 15px;
+    font-weight: 600;
 }
 </style>
 
@@ -203,9 +219,9 @@ Home
     class="developer"
     onclick="showDeveloper()"
 >
-    <strong>Developed By Sanbataa-Mulaatuu</strong>
-    <br><br>
-    For More Information Click Here
+   <strong>Developed By Sanbataa-Mulaatuu</strong>
+<br><br>
+<span class="click-info">For More Information Click Here</span>
 </button>
 
 <div id="developerInfo" class="developer-info">
